@@ -55,6 +55,7 @@
     "typescript": "~4.7.2"
   },
   "prisma": {
-    "schema": "libs/prisma-client/prisma/schema.prisma"
+    "schema": "libs/prisma-client/prisma/schema.prisma",
+    "seed": "node libs/prisma-client/prisma/seed.js"
   }
 }
