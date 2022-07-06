@@ -45,4 +45,17 @@ OperationsRouter.patch('/:id', async (req, res) => {
   }
 });
 
+OperationsRouter.delete('/:id', async (req, res) => {
+  const id = +req.params.id;
+  if (isNaN(id)) return res.status(400).json({ error: 'invalid id' });
+
+  try {
+    await prisma.operation.delete({ where: { id: id } });
+    return res.status(204).end();
+  } catch (e) {
+    if (e.code == 'P2025')
+      return res.status(404).json({ error: 'operation not found' });
+    return res.status(500).json({ error: 'something went wrong' });
+  }
+});
 export { OperationsRouter };
