@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = "file:../dev.db"
+}
+
+enum Tipo {
+  INGRESO
+  EGRESO
+}
+
+model Operacion {
+  id Int @id @default(autoincrement())
+  concepto String
+  monto Int // centavos
+  fecha DateTime
+  tipo Tipo
+}
