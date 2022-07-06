@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@alkemy-fullstack/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@alkemy-fullstack/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@alkemy-fullstack/prisma-client": ["libs/prisma-client/src"]
     }
   },
   "exclude": ["node_modules", "tmp"]
