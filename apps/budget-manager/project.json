@@ -1,0 +1,84 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/budget-manager/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/budget-manager",
+        "index": "apps/budget-manager/src/index.html",
+        "baseHref": "/",
+        "main": "apps/budget-manager/src/main.tsx",
+        "polyfills": "apps/budget-manager/src/polyfills.ts",
+        "tsConfig": "apps/budget-manager/tsconfig.app.json",
+        "assets": [
+          "apps/budget-manager/src/favicon.ico",
+          "apps/budget-manager/src/assets"
+        ],
+        "styles": ["apps/budget-manager/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/budget-manager/src/environments/environment.ts",
+              "with": "apps/budget-manager/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "budget-manager:build",
+        "hmr": true,
+        "proxyConfig": "apps/budget-manager/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "budget-manager:build:development"
+        },
+        "production": {
+          "buildTarget": "budget-manager:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/budget-manager/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/budget-manager"],
+      "options": {
+        "jestConfig": "apps/budget-manager/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
