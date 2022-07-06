@@ -1,9 +1,12 @@
 import * as express from 'express';
-const app = express();
+import { OperacionesRouter } from './routes/operaciones';
+import { PrismaClient } from '@alkemy-fullstack/prisma-client';
 
-app.get('/api', (_req, res) => {
-  res.send('hello world');
-});
+const app = express();
+app.use(express.json());
+export const prisma = new PrismaClient();
+
+app.use('/api/operaciones', OperacionesRouter);
 
 const port = process.env.port || 3333;
 const server = app.listen(port, () => {
