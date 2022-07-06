@@ -16,7 +16,7 @@ enum Tipo {
   EGRESO
 }
 
-model Operacion {
+model Operation {
   id Int @id @default(autoincrement())
   description String
   amount Int // centavos

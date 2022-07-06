@@ -1,12 +1,12 @@
-import { useOperaciones } from './hooks/useOperaciones';
+import { useOperations } from './hooks/useOperations';
 
 export const App = () => {
-  const operaciones = useOperaciones();
+  const operations = useOperations();
   return (
     <>
-      <h1>Operaciones</h1>
+      <h1>Operations</h1>
       <ul>
-        {operaciones.map((op) => (
+        {operations.map((op) => (
           <li key={op.id}>
             <span className={op.type} title={op.date}>{`$${
               op.amount / 100
