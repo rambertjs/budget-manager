@@ -8,9 +8,9 @@ export const App = () => {
       <ul>
         {operaciones.map((op) => (
           <li key={op.id}>
-            <span className={op.tipo} title={op.fecha}>{`$${
-              op.monto / 100
-            } por ${op.concepto}`}</span>
+            <span className={op.type} title={op.date}>{`$${
+              op.amount / 100
+            } por ${op.description}`}</span>
           </li>
         ))}
       </ul>

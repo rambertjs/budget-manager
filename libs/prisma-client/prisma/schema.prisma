@@ -18,8 +18,8 @@ enum Tipo {
 
 model Operacion {
   id Int @id @default(autoincrement())
-  concepto String
-  monto Int // centavos
-  fecha DateTime
-  tipo Tipo
+  description String
+  amount Int // centavos
+  date DateTime
+  type Tipo
 }
