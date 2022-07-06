@@ -20,4 +20,29 @@ OperationsRouter.post('/', async (req, res) => {
   res.json(newOperation);
 });
 
+OperationsRouter.patch('/:id', async (req, res) => {
+  const id = +req.params.id;
+  const updateBody = req.body;
+
+  if (req.body.type)
+    return res.status(400).json({ error: 'cannot update operation type' });
+
+  if (isNaN(id)) return res.status(400).json({ error: 'invalid id' });
+
+  try {
+    const updatedOp = await prisma.operation.update({
+      where: {
+        id: id,
+      },
+      data: updateBody,
+    });
+
+    return res.json(updatedOp);
+  } catch (e) {
+    if (e.code == 'P2025')
+      return res.status(404).json({ error: 'operation not found' });
+    return res.status(500).json({ error: 'something went wrong' });
+  }
+});
+
 export { OperationsRouter };
