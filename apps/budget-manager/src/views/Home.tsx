@@ -1,4 +1,13 @@
-import { Stack, Card, Grid, Space, Text, useMantineTheme } from '@mantine/core';
+import {
+  Stack,
+  Card,
+  Grid,
+  Space,
+  Text,
+  useMantineTheme,
+  Title,
+} from '@mantine/core';
+import { BalanceCard } from '../components/BalanceCard';
 import { OperationsTable } from '../components/OperationsTable';
 import { useOperations } from '../hooks/useOperations';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -15,38 +24,32 @@ export const Home = () => {
       <Card shadow="md">
         <Grid styles={{ width: '100%' }}>
           <Grid.Col>
-            <Card shadow="md">
-              <Text>Balance</Text>
-              <Text size="md">
-                {formatCurrency(balance.income - balance.expenses)}
-              </Text>
-            </Card>
+            <BalanceCard
+              title="Balance"
+              currency={balance.income - balance.expenses}
+            />
           </Grid.Col>
           <Grid.Col span={6}>
-            <Card
-              shadow="md"
+            <BalanceCard
               style={{
                 background: theme.colors['green'][3],
               }}
-            >
-              <Text>Ingresos</Text>
-              <Text size="md">{formatCurrency(balance.income)}</Text>
-            </Card>
+              title="Ingresos"
+              currency={balance.income}
+            />
           </Grid.Col>
           <Grid.Col span={6}>
-            <Card
-              shadow="md"
+            <BalanceCard
               style={{
                 background: theme.colors['red'][3],
               }}
-            >
-              <Text>Egresos</Text>
-              <Text size="md">{formatCurrency(balance.expenses)}</Text>
-            </Card>
+              title="Egresos"
+              currency={balance.expenses}
+            />
           </Grid.Col>
         </Grid>
       </Card>
-      <Space />
+      <Title order={2}>Operaciones recientes</Title>
       <OperationsTable operations={operations} />
     </Stack>
   );
