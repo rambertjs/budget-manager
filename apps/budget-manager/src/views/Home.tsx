@@ -1,13 +1,4 @@
-import {
-  Stack,
-  Card,
-  Grid,
-  Space,
-  Table,
-  Text,
-  useMantineTheme,
-} from '@mantine/core';
-import dayjs from 'dayjs';
+import { Stack, Card, Grid, Space, Text, useMantineTheme } from '@mantine/core';
 import { OperationsTable } from '../components/OperationsTable';
 import { useOperations } from '../hooks/useOperations';
 import { formatCurrency } from '../utils/formatCurrency';
