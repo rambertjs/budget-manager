@@ -9,7 +9,10 @@ OperationsRouter.get('/', async (req, res) => {
     type: (req.query.type || undefined) as Type,
   };
 
-  const operations = await prisma.operation.findMany({ where: lookupParams });
+  const operations = await prisma.operation.findMany({
+    where: lookupParams,
+    orderBy: { date: 'desc' },
+  });
   res.json(operations);
 });
 
