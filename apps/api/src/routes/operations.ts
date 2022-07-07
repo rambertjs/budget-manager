@@ -6,6 +6,7 @@ const OperationsRouter = Router();
 
 OperationsRouter.get('/', async (req, res) => {
   let balance;
+
   if (req.query.withBalance != undefined) {
     const preBalance = await prisma.operation.groupBy({
       by: ['type'],
@@ -19,11 +20,14 @@ OperationsRouter.get('/', async (req, res) => {
     };
   }
   const lookupParams = {
-    type: (req.query.type || undefined) as Type,
+    where: {
+      type: (req.query.type || undefined) as Type,
+    },
+    take: +req.query.take || undefined,
   };
 
   const operations = await prisma.operation.findMany({
-    where: lookupParams,
+    ...lookupParams,
     orderBy: { date: 'desc' },
   });
 
