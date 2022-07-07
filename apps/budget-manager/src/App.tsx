@@ -5,8 +5,8 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { AppHeader } from './components/AppHeader';
-import { AppNavbar } from './components/AppNavbar';
+import { AppHeader } from './components/App/AppHeader';
+import { AppNavbar } from './components/App/AppNavbar';
 
 import 'dayjs/locale/es';
 import dayjs from 'dayjs';
