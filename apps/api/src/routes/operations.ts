@@ -5,6 +5,19 @@ import { Type } from '@alkemy-fullstack/prisma-client';
 const OperationsRouter = Router();
 
 OperationsRouter.get('/', async (req, res) => {
+  let balance;
+  if (req.query.withBalance != undefined) {
+    const preBalance = await prisma.operation.groupBy({
+      by: ['type'],
+      _sum: {
+        amount: true,
+      },
+    });
+    balance = {
+      income: preBalance[1]._sum.amount,
+      expenses: preBalance[0]._sum.amount,
+    };
+  }
   const lookupParams = {
     type: (req.query.type || undefined) as Type,
   };
@@ -13,7 +26,8 @@ OperationsRouter.get('/', async (req, res) => {
     where: lookupParams,
     orderBy: { date: 'desc' },
   });
-  res.json(operations);
+
+  res.json({ operations, ...{ balance } });
 });
 
 OperationsRouter.post('/', async (req, res) => {
