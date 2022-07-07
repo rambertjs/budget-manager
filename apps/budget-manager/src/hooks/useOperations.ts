@@ -6,11 +6,20 @@ type Balance = {
   income: number;
   expenses: number;
 };
-type Params = { withBalance: boolean };
+type Params<T extends boolean> = { withBalance: T };
 
-export const useOperations = ({ withBalance }: Params) => {
+export const useOperations = <T extends boolean>({
+  withBalance,
+}: Params<T>): T extends true
+  ? {
+      operations: Operation[];
+      balance: Balance;
+    }
+  : {
+      operations: Operation[];
+    } => {
   const [operations, setOperations] = useState<Operation[]>([]);
-  const [balance, setBalance] = useState<Balance>();
+  const [balance, setBalance] = useState<Balance>({} as Balance);
 
   useEffect(() => {
     fetch(`/api/operations${withBalance && '?withBalance'}`)
