@@ -1,6 +1,6 @@
+import { Operation } from '@alkemy-fullstack/api-interfaces';
 import { Table } from '@mantine/core';
 import dayjs from 'dayjs';
-import { Operation } from '../hooks/useOperations';
 import { formatCurrency } from '../utils/formatCurrency';
 
 export const OperationsTable = ({
