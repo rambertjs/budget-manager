@@ -1,16 +1,7 @@
-import {
-  Stack,
-  Card,
-  Grid,
-  Space,
-  Text,
-  useMantineTheme,
-  Title,
-} from '@mantine/core';
+import { Stack, Card, Grid, useMantineTheme, Title } from '@mantine/core';
 import { BalanceCard } from '../components/BalanceCard';
 import { OperationsTable } from '../components/OperationsTable';
 import { useOperations } from '../hooks/useOperations';
-import { formatCurrency } from '../utils/formatCurrency';
 
 export const Home = () => {
   const theme = useMantineTheme();
