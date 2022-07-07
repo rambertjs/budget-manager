@@ -8,6 +8,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import dayjs from 'dayjs';
+import { OperationsTable } from '../components/OperationsTable';
 import { useOperations } from '../hooks/useOperations';
 import { formatCurrency } from '../utils/formatCurrency';
 
@@ -55,24 +56,7 @@ export const Home = () => {
         </Grid>
       </Card>
       <Space />
-      <Table>
-        <thead>
-          <tr>
-            <th>Concepto</th>
-            <th>Fecha</th>
-            <th>Importe</th>
-          </tr>
-        </thead>
-        <tbody>
-          {operations.map((op) => (
-            <tr key={op.id}>
-              <td>{op.description}</td>
-              <td>{dayjs(op.date).format('dddd, MMMM D, YYYY hh:mm')}</td>
-              <td>{formatCurrency(op.amount)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <OperationsTable operations={operations} />
     </Stack>
   );
 };

@@ -1,7 +1,7 @@
 import { Operation as DBOperation } from '@alkemy-fullstack/prisma-client';
 import { useEffect, useState } from 'react';
 
-type Operation = Omit<DBOperation, 'date'> & { date: string };
+export type Operation = Omit<DBOperation, 'date'> & { date: string };
 type Balance = {
   income: number;
   expenses: number;
