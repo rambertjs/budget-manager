@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { OperationsRouter } from './routes/operations';
+import { OperationsRouter } from './operations/routes';
 import { PrismaClient } from '@alkemy-fullstack/prisma-client';
 
 const app = express();
