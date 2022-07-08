@@ -2,7 +2,7 @@ import { prisma } from '../main';
 
 export const OperationsService = {
   async create(operation) {
-    return await prisma.operation.create(operation);
+    return await prisma.operation.create({ data: operation });
   },
   async getBalance() {
     const preBalance = await prisma.operation.groupBy({
