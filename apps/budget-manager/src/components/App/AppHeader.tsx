@@ -2,7 +2,6 @@ import {
   Burger,
   Group,
   Header,
-  Image,
   MediaQuery,
   Title,
   UnstyledButton,
