@@ -37,18 +37,20 @@ export const NewOperation = () => {
   });
 
   const handleSubmit = (values: FormData) => {
-    const { description, amount, type } = values;
+    const { description, type } = values;
     const [hour, minutes] = values.time.split(':');
     const date = dayjs(values.date)
       .hour(+hour)
       .minute(+minutes)
       .toISOString();
+    const amount = values.amount * 100;
 
-    console.log({
-      date,
-      description,
-      amount,
-      type,
+    fetch('/api/operations', {
+      method: 'POST',
+      body: JSON.stringify({ date, description, amount, type }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
   };
   return (
