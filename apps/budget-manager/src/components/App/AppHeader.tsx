@@ -16,7 +16,10 @@ export const AppHeader = ({ toggleNavbar, burgerStatus }: Props) => {
             mr="xl"
           />
         </MediaQuery>
-        <Title>Tu Presupuesto</Title>
+        <img src="assets/logo.png" alt="" style={{ maxHeight: '100%' }} />
+        <Title px={15} styles={(theme) => ({ color: theme.colors['gray'][7] })}>
+          Tu Presupuesto
+        </Title>
       </div>
     </Header>
   );
