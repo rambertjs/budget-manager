@@ -1,4 +1,13 @@
-import { Burger, Header, MediaQuery, Title } from '@mantine/core';
+import {
+  Burger,
+  Group,
+  Header,
+  Image,
+  MediaQuery,
+  Title,
+  UnstyledButton,
+} from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 interface Props {
   toggleNavbar: () => void;
@@ -8,7 +17,7 @@ interface Props {
 export const AppHeader = ({ toggleNavbar, burgerStatus }: Props) => {
   return (
     <Header height={75} p="md">
-      <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+      <Group sx={{ height: '100%' }}>
         <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
           <Burger
             opened={burgerStatus}
@@ -16,11 +25,18 @@ export const AppHeader = ({ toggleNavbar, burgerStatus }: Props) => {
             mr="xl"
           />
         </MediaQuery>
-        <img src="assets/logo.png" alt="" style={{ maxHeight: '100%' }} />
-        <Title px={15} styles={(theme) => ({ color: theme.colors['gray'][7] })}>
-          Tu Presupuesto
-        </Title>
-      </div>
+        <UnstyledButton component={Link} to="/" style={{ height: '100%' }}>
+          <Group style={{ height: '100%' }}>
+            <img src="assets/logo.png" alt="" style={{ maxHeight: '100%' }} />
+            <Title
+              px={15}
+              styles={(theme) => ({ color: theme.colors['gray'][7] })}
+            >
+              Tu Presupuesto
+            </Title>
+          </Group>
+        </UnstyledButton>
+      </Group>
     </Header>
   );
 };
