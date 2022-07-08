@@ -21,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-router-dom": "^6.3.0",
     "regenerator-runtime": "0.13.7",
+    "tabler-icons-react": "^1.52.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
