@@ -35,7 +35,6 @@ export const NewOperation = () => {
     },
     schema: zodResolver(schema),
   });
-
   const handleSubmit = (values: FormData) => {
     const { description, type } = values;
     const [hour, minutes] = values.time.split(':');
@@ -51,7 +50,12 @@ export const NewOperation = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw res.json();
+      })
+      .catch(console.error);
   };
   return (
     <Center sx={{ height: '100%' }}>
