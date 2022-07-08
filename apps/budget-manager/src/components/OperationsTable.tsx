@@ -1,4 +1,4 @@
-import { Operation } from '@alkemy-fullstack/api-interfaces';
+import { Operation } from '../hooks/useOperations';
 import { Table } from '@mantine/core';
 import dayjs from 'dayjs';
 import { formatCurrency } from '../utils/formatCurrency';

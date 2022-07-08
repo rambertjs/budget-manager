@@ -3,7 +3,6 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "api-interfaces": "libs/api-interfaces",
     "budget-manager": "apps/budget-manager",
     "prisma-client": "libs/prisma-client"
   }
