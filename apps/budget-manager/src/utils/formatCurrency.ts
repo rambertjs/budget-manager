@@ -1,1 +1,2 @@
-export const formatCurrency = (amount: number) => `$${amount / 100}`;
+export const formatCurrency = (amount: string | number | undefined) =>
+  `$${+(amount || 0) / 100}`;
