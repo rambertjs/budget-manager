@@ -34,7 +34,7 @@ export const App = () => {
           },
         }}
       >
-        <Container>
+        <Container sx={{ height: '100%' }}>
           <Outlet />
         </Container>
       </AppShell>
