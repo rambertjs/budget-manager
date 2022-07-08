@@ -10,7 +10,7 @@ export const OperationsController = {
   async getAll(req, res) {
     const balance =
       req.query.withBalance !== undefined
-        ? OperationsService.getBalance()
+        ? await OperationsService.getBalance()
         : null;
 
     const lookupParams = {
@@ -20,7 +20,7 @@ export const OperationsController = {
       take: +req.query.take || undefined,
     };
 
-    const operations = OperationsService.getAll(lookupParams);
+    const operations = await OperationsService.getAll(lookupParams);
 
     res.json({ operations, ...{ balance } });
   },
