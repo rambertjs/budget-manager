@@ -1,7 +1,7 @@
 import { type Operation as DBOperation } from '@alkemy-fullstack/prisma-client';
 import { useEffect, useState } from 'react';
 
-export type Operation = Omit<DBOperation, 'date'> & { date: string };
+export type IOperation = Omit<DBOperation, 'date'> & { date: string };
 export type Balance = {
   income: number;
   expenses: number;
@@ -14,13 +14,13 @@ export const useOperations = <T extends boolean>({
   take,
 }: Params<T>): T extends true
   ? {
-      operations: Operation[];
+      operations: IOperation[];
       balance: Balance;
     }
   : {
-      operations: Operation[];
+      operations: IOperation[];
     } => {
-  const [operations, setOperations] = useState<Operation[]>([]);
+  const [operations, setOperations] = useState<IOperation[]>([]);
   const [balance, setBalance] = useState<Balance>({} as Balance);
 
   useEffect(() => {

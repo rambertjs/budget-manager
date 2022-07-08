@@ -1,6 +1,6 @@
 import { Stack, Card, Grid, useMantineTheme, Title } from '@mantine/core';
 import { BalanceCard } from '../components/BalanceCard';
-import { OperationsTable } from '../components/OperationsTable';
+import { OperationsTable } from '../components/Operations/OperationsTable';
 import { useOperations } from '../hooks/useOperations';
 
 export const Home = () => {
