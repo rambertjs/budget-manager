@@ -4,9 +4,11 @@ import dayjs from 'dayjs';
 import {
   NewOperationForm,
   NewOperationFormData,
-} from '../components/NewOperationForm';
+} from '../components/Operations/NewOperationForm';
+import { useNavigate } from 'react-router-dom';
 
 export const NewOperation = () => {
+  const navigate = useNavigate();
   const handleSubmit = (values: NewOperationFormData) => {
     const { description, type } = values;
     const [hour, minutes] = values.time.split(':');
@@ -24,6 +26,7 @@ export const NewOperation = () => {
       },
     })
       .then((res) => {
+        navigate('/');
         if (res.ok) return res.json();
         throw res.json();
       })
