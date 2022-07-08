@@ -1,12 +1,18 @@
 import * as express from 'express';
 import { OperationsRouter } from './operations/routes';
 import { PrismaClient } from '@alkemy-fullstack/prisma-client';
+import {
+  prismaErrorMiddleware,
+  customErrorMiddleware,
+} from './errorMiddleware';
 
 const app = express();
 app.use(express.json());
 export const prisma = new PrismaClient();
 
 app.use('/api/operations', OperationsRouter);
+app.use(prismaErrorMiddleware);
+app.use(customErrorMiddleware);
 
 const port = process.env.port || 3333;
 const server = app.listen(port, () => {
