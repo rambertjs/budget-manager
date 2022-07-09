@@ -3,7 +3,7 @@ import { Router } from 'express';
 
 const OperationsRouter = Router();
 
-OperationsRouter.get('/', OperationsController.getAll);
+OperationsRouter.get('/', OperationsController.get);
 
 OperationsRouter.post('/', OperationsController.create);
 

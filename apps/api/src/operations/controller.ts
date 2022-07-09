@@ -1,28 +1,26 @@
 import { CustomError } from './../errorMiddleware';
 import { OperationsService } from './service';
-import { Type } from '@alkemy-fullstack/prisma-client';
 
 export const OperationsController = {
   async create(req, res) {
     const newOperation = await OperationsService.create(req.body);
     res.json(newOperation);
   },
-  async getAll(req, res) {
-    const balance =
-      req.query.withBalance !== undefined
-        ? await OperationsService.getBalance()
-        : null;
-
+  async get(req, res) {
     const lookupParams = {
       where: {
-        type: (req.query.type || undefined) as Type,
+        type: req.query.type || undefined,
       },
-      take: +req.query.take || undefined,
     };
 
-    const operations = await OperationsService.getAll(lookupParams);
+    if (req.query.page) {
+      const page = +req.query.page;
+      const operations = await OperationsService.getPage(page, lookupParams);
+      return res.json(operations);
+    }
 
-    res.json({ operations, ...{ balance } });
+    const operations = await OperationsService.getAll(lookupParams);
+    return res.json({ operations });
   },
 
   async update(req, res, next) {

@@ -22,6 +22,14 @@ export const OperationsService = {
       orderBy: { date: 'desc' },
     });
   },
+  async getPage(page, lookupParams) {
+    return await prisma.operation.findMany({
+      ...lookupParams,
+      orderBy: { date: 'desc' },
+      skip: page * 10,
+      take: 10,
+    });
+  },
   async update(operationId, data) {
     return await prisma.operation.update({
       where: {
