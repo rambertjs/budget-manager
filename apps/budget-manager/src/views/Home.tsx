@@ -1,5 +1,5 @@
 import { Stack, Card, Grid, useMantineTheme, Title } from '@mantine/core';
-import { BalanceCard } from '../components/BalanceCard';
+import { BalanceCard } from '../components/Balance/BalanceCard';
 import { OperationsTable } from '../components/Operations/OperationsTable';
 import { useBalance } from '../hooks/useBalance';
 import { useOperations } from '../hooks/useOperations';

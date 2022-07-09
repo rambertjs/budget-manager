@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { useOperationMutations } from '../../hooks/useOperationMutations';
 import { IOperation } from '../../hooks/useOperations';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { DeleteButton } from '../Buttons/DeleteButton';
-import { EditButton } from '../Buttons/EditButton';
-import { DeleteOperationModal } from '../Modals/DeleteOperationModal';
+import { DeleteButton } from './Buttons/DeleteButton';
+import { EditButton } from './Buttons/EditButton';
+import { DeleteOperationModal } from './Modals/DeleteOperationModal';
 
 export const Operation = ({ op }: { op: IOperation }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);

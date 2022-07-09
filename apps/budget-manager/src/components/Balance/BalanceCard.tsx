@@ -1,5 +1,5 @@
 import { Card, Text } from '@mantine/core';
-import { formatCurrency } from '../utils/formatCurrency';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 export const BalanceCard = ({
   title,
