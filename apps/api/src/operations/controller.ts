@@ -25,8 +25,7 @@ export const OperationsController = {
   async getBalance(req, res) {
     const balance = await OperationsService.getBalance();
     return res.json(balance);
-  }
-
+  },
   async update(req, res, next) {
     const id = +req.params.id;
     const updateBody = req.body;
