@@ -23,12 +23,19 @@ export const OperationsService = {
     });
   },
   async getPage(page, lookupParams) {
-    return await prisma.operation.findMany({
-      ...lookupParams,
-      orderBy: { date: 'desc' },
-      skip: (page - 1) * 10,
-      take: 10,
-    });
+    return {
+      data: await prisma.operation.findMany({
+        ...lookupParams,
+        orderBy: { date: 'desc' },
+        skip: (page - 1) * 10,
+        take: 10,
+      }),
+      totalPages: Math.ceil(
+        (await prisma.operation.count({
+          ...lookupParams,
+        })) / 10
+      ),
+    };
   },
   async update(operationId, data) {
     return await prisma.operation.update({
