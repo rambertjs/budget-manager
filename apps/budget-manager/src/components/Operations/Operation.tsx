@@ -2,6 +2,8 @@ import { Button, Group, Modal, Stack, Text, Title } from '@mantine/core';
 
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useOperationMutations } from '../../hooks/useOperationMutations';
 import { IOperation } from '../../hooks/useOperations';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { DeleteButton } from '../Buttons/DeleteButton';
@@ -10,8 +12,12 @@ import { DeleteOperationModal } from '../Modals/DeleteOperationModal';
 
 export const Operation = ({ op }: { op: IOperation }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const { deleteOperation, updateOperation } = useOperationMutations(op.id);
 
-  const handleDelete = () => console.log('NOT IMPLEMENTED');
+  const handleDelete = () => {
+    setDeleteModalOpen(false);
+    deleteOperation();
+  };
   return (
     <>
       <DeleteOperationModal
