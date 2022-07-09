@@ -1,8 +1,7 @@
-import { Button, Group, Modal, Stack, Text, Title } from '@mantine/core';
+import { Group } from '@mantine/core';
 
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { useOperationMutations } from '../../hooks/useOperationMutations';
 import { IOperation } from '../../hooks/useOperations';
 import { formatCurrency } from '../../utils/formatCurrency';
