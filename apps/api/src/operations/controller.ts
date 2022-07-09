@@ -29,12 +29,13 @@ export const OperationsController = {
   async update(req, res, next) {
     const id = +req.params.id;
     const updateBody = req.body;
-
     if (updateBody.type)
       next(new CustomError(400, 'cannot update operation type'));
     if (isNaN(id)) next(new CustomError(400, 'invalid id'));
 
-    OperationsService.update(id, updateBody).then(res.json).catch(next);
+    OperationsService.update(id, updateBody)
+      .then((op) => res.json(op))
+      .catch(next);
   },
   async delete(req, res, next) {
     const id = +req.params.id;
