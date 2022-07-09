@@ -8,21 +8,34 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { DeleteButton } from './Buttons/DeleteButton';
 import { EditButton } from './Buttons/EditButton';
 import { DeleteOperationModal } from './Modals/DeleteOperationModal';
+import { EditOperationModal } from './Modals/EditOperationModal';
 
 export const Operation = ({ op }: { op: IOperation }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const { deleteOperation, updateOperation } = useOperationMutations(op.id);
 
   const handleDelete = () => {
     setDeleteModalOpen(false);
     deleteOperation();
   };
+  const handleEdit = (op: Partial<IOperation>) => {
+    setEditModalOpen(false);
+    updateOperation(op);
+  };
+
   return (
     <>
       <DeleteOperationModal
         closeModal={() => setDeleteModalOpen(false)}
         isOpen={deleteModalOpen}
         onClick={handleDelete}
+      />
+      <EditOperationModal
+        closeModal={() => setEditModalOpen(false)}
+        isOpen={editModalOpen}
+        op={op}
+        onSubmit={handleEdit}
       />
       <tr>
         <td>{op.description}</td>
@@ -31,11 +44,7 @@ export const Operation = ({ op }: { op: IOperation }) => {
         <td>
           <Group>
             <DeleteButton onClick={() => setDeleteModalOpen(true)} />
-            <EditButton
-              onClick={() => {
-                void 0;
-              }}
-            />
+            <EditButton onClick={() => setEditModalOpen(true)} />
           </Group>
         </td>
       </tr>

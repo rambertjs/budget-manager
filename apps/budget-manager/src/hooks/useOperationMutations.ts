@@ -9,6 +9,9 @@ export const useOperationMutations = (id: number) => ({
     return fetch(`/api/operations/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(operation),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
   },
 });
