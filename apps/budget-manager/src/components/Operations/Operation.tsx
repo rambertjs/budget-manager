@@ -24,7 +24,7 @@ export const Operation = ({ op }: { op: IOperation }) => {
         isOpen={deleteModalOpen}
         onClick={handleDelete}
       />
-      <tr key={op.id}>
+      <tr>
         <td>{op.description}</td>
         <td>{dayjs(op.date).format('dddd, MMMM D, YYYY hh:mm')}</td>
         <td>{formatCurrency(op.amount)}</td>

@@ -19,7 +19,7 @@ export const OperationsTable = ({
       </thead>
       <tbody>
         {operations.map((op) => (
-          <Operation op={op} />
+          <Operation key={op.id} op={op} />
         ))}
       </tbody>
     </Table>
