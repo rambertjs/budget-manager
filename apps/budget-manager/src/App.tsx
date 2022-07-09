@@ -1,9 +1,4 @@
-import {
-  AppShell,
-  Container,
-  MantineProvider,
-  useMantineTheme,
-} from '@mantine/core';
+import { AppShell, Container, useMantineTheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { AppHeader } from './components/App/AppHeader';
 import { AppNavbar } from './components/App/AppNavbar';
@@ -18,27 +13,25 @@ export const App = () => {
   const theme = useMantineTheme();
 
   return (
-    <MantineProvider withNormalizeCSS withGlobalStyles>
-      <AppShell
-        padding="md"
-        navbar={<AppNavbar isOpen={isNavbarOpen} />}
-        navbarOffsetBreakpoint="sm"
-        header={<AppHeader toggleNavbar={toggle} burgerStatus={isNavbarOpen} />}
-        fixed
-        styles={{
-          main: {
-            background:
-              theme.colorScheme === 'dark'
-                ? theme.colors['dark'][8]
-                : theme.colors['gray'][0],
-          },
-        }}
-      >
-        <Container sx={{ height: '100%' }}>
-          <Outlet />
-        </Container>
-      </AppShell>
-    </MantineProvider>
+    <AppShell
+      padding="md"
+      navbar={<AppNavbar isOpen={isNavbarOpen} />}
+      navbarOffsetBreakpoint="sm"
+      header={<AppHeader toggleNavbar={toggle} burgerStatus={isNavbarOpen} />}
+      fixed
+      styles={{
+        main: {
+          background:
+            theme.colorScheme === 'dark'
+              ? theme.colors['dark'][8]
+              : theme.colors['gray'][0],
+        },
+      }}
+    >
+      <Container sx={{ height: '100%' }}>
+        <Outlet />
+      </Container>
+    </AppShell>
   );
 };
 
