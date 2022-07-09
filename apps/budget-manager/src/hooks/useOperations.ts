@@ -5,12 +5,16 @@ export type IOperation = Omit<DBOperation, 'date'> & { date: string };
 
 export const useOperations = (page: number) => {
   const [operations, setOperations] = useState<IOperation[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     fetch(`/api/operations?page=${page}`)
       .then((res) => res.json())
-      .then(setOperations);
+      .then(({ data, totalPages }) => {
+        setOperations(data);
+        setTotalPages(totalPages);
+      });
   }, [page]);
 
-  return { operations };
+  return { operations, totalPages };
 };
