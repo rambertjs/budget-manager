@@ -6,9 +6,15 @@ import {
   NewOperationFormData,
 } from '../components/Operations/NewOperationForm';
 import { useNavigate } from 'react-router-dom';
+import { createOperation } from '../react-query/operations';
+import { useMutation } from 'react-query';
+import { Type } from '@alkemy-fullstack/prisma-client';
 
 export const NewOperation = () => {
   const navigate = useNavigate();
+  const createOperationMutation = useMutation(createOperation, {
+    onSuccess: () => navigate('/'),
+  });
   const handleSubmit = (values: NewOperationFormData) => {
     const { description, type } = values;
     const [hour, minutes] = values.time.split(':');
@@ -17,20 +23,8 @@ export const NewOperation = () => {
       .minute(+minutes)
       .toISOString();
     const amount = values.amount * 100;
-
-    fetch('/api/operations', {
-      method: 'POST',
-      body: JSON.stringify({ date, description, amount, type }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        navigate('/');
-        if (res.ok) return res.json();
-        throw res.json();
-      })
-      .catch(console.error);
+    const operation = { description, type: type as Type, amount, date };
+    createOperationMutation.mutate(operation);
   };
   return (
     <Center sx={{ height: '100%' }}>

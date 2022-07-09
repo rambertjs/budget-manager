@@ -9,7 +9,7 @@ import {
 } from '@mantine/core';
 import { DatePicker, TimeInput } from '@mantine/dates';
 import { useForm, zodResolver } from '@mantine/form';
-import { IOperation } from '../../../hooks/useOperations';
+import { IOperation } from '../../../react-query/operations';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -28,7 +28,7 @@ export const EditOperationModal = ({
   isOpen: boolean;
   closeModal: () => void;
   op: IOperation;
-  onSubmit: (op: Omit<IOperation, 'id' | 'type'>) => void;
+  onSubmit: (op: Partial<IOperation>) => void;
 }) => {
   const date = new Date(op.date);
   const form = useForm({

@@ -2,8 +2,12 @@ import { Group } from '@mantine/core';
 
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import { useOperationMutations } from '../../hooks/useOperationMutations';
-import { IOperation } from '../../hooks/useOperations';
+import { useMutation } from 'react-query';
+import {
+  deleteOperation,
+  IOperation,
+  updateOperation,
+} from '../../react-query/operations';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { DeleteButton } from './Buttons/DeleteButton';
 import { EditButton } from './Buttons/EditButton';
@@ -13,15 +17,15 @@ import { EditOperationModal } from './Modals/EditOperationModal';
 export const Operation = ({ op }: { op: IOperation }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const { deleteOperation, updateOperation } = useOperationMutations(op.id);
+  const deleteOperationMutation = useMutation(deleteOperation);
 
   const handleDelete = () => {
     setDeleteModalOpen(false);
-    deleteOperation();
+    deleteOperationMutation.mutate(op.id);
   };
-  const handleEdit = (op: Partial<IOperation>) => {
+  const handleEdit = (editedOp: Partial<IOperation>) => {
     setEditModalOpen(false);
-    updateOperation(op);
+    updateOperation(op.id, editedOp);
   };
 
   return (

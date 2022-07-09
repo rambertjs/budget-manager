@@ -1,5 +1,5 @@
 import { Table } from '@mantine/core';
-import { IOperation } from '../../hooks/useOperations';
+import { IOperation } from '../../react-query/operations';
 import { Operation } from './Operation';
 
 export const OperationsTable = ({
