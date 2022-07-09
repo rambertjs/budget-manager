@@ -43,7 +43,7 @@ export const Operation = ({ op }: { op: IOperation }) => {
       />
       <tr>
         <td>{op.description}</td>
-        <td>{dayjs(op.date).format('dddd, MMMM D, YYYY hh:mm')}</td>
+        <td>{dayjs(op.date).format('dddd, MMMM D, YYYY HH:mm')}</td>
         <td>{formatCurrency(op.amount)}</td>
         <td>
           <Group>
