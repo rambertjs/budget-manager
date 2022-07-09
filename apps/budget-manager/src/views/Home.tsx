@@ -1,14 +1,13 @@
 import { Stack, Card, Grid, useMantineTheme, Title } from '@mantine/core';
 import { BalanceCard } from '../components/BalanceCard';
 import { OperationsTable } from '../components/Operations/OperationsTable';
+import { useBalance } from '../hooks/useBalance';
 import { useOperations } from '../hooks/useOperations';
 
 export const Home = () => {
   const theme = useMantineTheme();
-  const { operations, balance } = useOperations({
-    withBalance: true,
-    take: 10,
-  });
+  const { operations } = useOperations(1);
+  const { balance } = useBalance();
 
   return (
     <Stack spacing="xl">
