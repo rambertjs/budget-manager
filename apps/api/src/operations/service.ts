@@ -14,6 +14,7 @@ export const OperationsService = {
     return {
       income: preBalance[1]._sum.amount,
       expenses: preBalance[0]._sum.amount,
+      balance: preBalance[1]._sum.amount - preBalance[0]._sum.amount,
     };
   },
   async getAll(lookupParams) {
@@ -24,7 +25,7 @@ export const OperationsService = {
   },
   async getPage(page, lookupParams) {
     return {
-      data: await prisma.operation.findMany({
+      operations: await prisma.operation.findMany({
         ...lookupParams,
         orderBy: { date: 'desc' },
         skip: (page - 1) * 10,
