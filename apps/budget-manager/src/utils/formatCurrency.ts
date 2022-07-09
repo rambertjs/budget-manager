@@ -1,2 +1,5 @@
 export const formatCurrency = (amount: string | number | undefined) =>
-  `$${+(amount || 0) / 100}`;
+  Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  }).format(+(amount || 0) / 100);
