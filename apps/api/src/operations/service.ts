@@ -26,7 +26,7 @@ export const OperationsService = {
     return await prisma.operation.findMany({
       ...lookupParams,
       orderBy: { date: 'desc' },
-      skip: page * 10,
+      skip: (page - 1) * 10,
       take: 10,
     });
   },
