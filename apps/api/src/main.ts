@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import * as express from 'express';
+import { AuthRouter } from './auth/routes';
 import { OperationsRouter } from './operations/routes';
 import { PrismaClient } from '@alkemy-fullstack/prisma-client';
 import {
@@ -11,6 +12,7 @@ const app = express();
 app.use(express.json());
 export const prisma = new PrismaClient();
 
+app.use('/api/auth', AuthRouter);
 app.use('/api/operations', OperationsRouter);
 app.use(prismaErrorMiddleware);
 app.use(customErrorMiddleware);
