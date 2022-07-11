@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const prisma = new (require('../src').PrismaClient)();
 const MOCK_DATA = [
   {
@@ -304,9 +305,15 @@ const MOCK_DATA = [
 
 async function seed() {
   await prisma.operation.deleteMany();
-  await prisma.operation.createMany({
-    //@ts-expect-error untyped data
-    data: MOCK_DATA,
+  await prisma.user.create({
+    data: {
+      email: 'admin@example.com',
+      passwordHash: bcrypt.hashSync('admin', 10),
+      operations: {
+        // @ts-expect-error: nontyped data
+        createMany: { data: MOCK_DATA },
+      },
+    },
   });
 }
 

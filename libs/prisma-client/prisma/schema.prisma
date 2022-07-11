@@ -16,10 +16,19 @@ enum Type {
   EGRESO
 }
 
+model User {
+  id          String @id @default(cuid())
+  email       String
+  passwordHash    String
+  operations Operation[]
+}
+
 model Operation {
   id Int @id @default(autoincrement())
   description String
   amount Int // centavos
   date DateTime
   type Type
+  user User @relation(fields: [userId], references: [id])
+  userId String
 }
