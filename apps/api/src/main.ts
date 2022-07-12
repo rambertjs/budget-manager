@@ -7,13 +7,14 @@ import {
   prismaErrorMiddleware,
   customErrorMiddleware,
 } from './errorMiddleware';
+import { AuthMiddleware } from './auth/middleware';
 
 const app = express();
 app.use(express.json());
 export const prisma = new PrismaClient();
 
 app.use('/api/auth', AuthRouter);
-app.use('/api/operations', OperationsRouter);
+app.use('/api/operations', [AuthMiddleware, OperationsRouter]);
 app.use(prismaErrorMiddleware);
 app.use(customErrorMiddleware);
 
