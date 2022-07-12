@@ -1,8 +1,11 @@
 import { AuthService } from './service';
-import { CustomError } from './../errorMiddleware';
+
 export const AuthController = {
-  async login(_req, _res, next) {
-    next(new CustomError(501, 'not implemented'));
+  async login(req, res, next) {
+    const { email, password } = req.body;
+    AuthService.login(email, password)
+      .then((user) => res.json(user))
+      .catch(next);
   },
   async register(req, res, next) {
     const { email, password } = req.body;
