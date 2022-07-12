@@ -12,7 +12,7 @@ export const getOperations = (page = 1) => {
   ) as Promise<OperationQueryData>;
 };
 
-export const createOperation = (operation: Omit<IOperation, 'id'>) => {
+export const createOperation = (operation: Partial<IOperation>) => {
   return fetch('/api/operations', {
     method: 'POST',
     body: JSON.stringify(operation),
