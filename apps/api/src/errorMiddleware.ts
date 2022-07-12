@@ -19,7 +19,7 @@ export const prismaErrorMiddleware = (err, req, res: Response, next) => {
   next(err);
 };
 
-export const customErrorMiddleware = (err, _req, res: Response) => {
+export const customErrorMiddleware = (err, _req, res: Response, _next) => {
   if (err instanceof CustomError) {
     return res.status(err.status).json({
       error: err.message,
