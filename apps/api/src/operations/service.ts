@@ -4,17 +4,20 @@ export const OperationsService = {
   async create(operation) {
     return await prisma.operation.create({ data: operation });
   },
-  async getBalance() {
+  async getBalance(userId) {
     const preBalance = await prisma.operation.groupBy({
       by: ['type'],
       _sum: {
         amount: true,
       },
+      where: {
+        userId,
+      },
     });
     return {
-      income: preBalance[1]._sum.amount,
-      expenses: preBalance[0]._sum.amount,
-      balance: preBalance[1]._sum.amount - preBalance[0]._sum.amount,
+      income: preBalance[1]?._sum.amount ?? 0,
+      expenses: preBalance[0]?._sum.amount ?? 0,
+      balance: preBalance[1]?._sum.amount - preBalance[0]?._sum.amount || 0,
     };
   },
   async getAll(lookupParams) {

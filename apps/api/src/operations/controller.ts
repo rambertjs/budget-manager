@@ -3,13 +3,17 @@ import { OperationsService } from './service';
 
 export const OperationsController = {
   async create(req, res) {
-    const newOperation = await OperationsService.create(req.body);
+    const newOperation = await OperationsService.create({
+      ...req.body,
+      userId: req.user.id,
+    });
     res.json(newOperation);
   },
   async get(req, res) {
     const lookupParams = {
       where: {
         type: req.query.type || undefined,
+        userId: req.userId,
       },
     };
 
@@ -23,7 +27,7 @@ export const OperationsController = {
     return res.json({ operations });
   },
   async getBalance(req, res) {
-    const balance = await OperationsService.getBalance();
+    const balance = await OperationsService.getBalance(req.userId);
     return res.json(balance);
   },
   async update(req, res, next) {
