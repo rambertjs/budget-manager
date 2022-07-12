@@ -5,16 +5,11 @@ import {
   NewOperationForm,
   NewOperationFormData,
 } from '../components/Operations/NewOperationForm';
-import { useNavigate } from 'react-router-dom';
-import { createOperation } from '../react-query/operations';
-import { useMutation } from 'react-query';
+import { useCreateOperation } from '../hooks/useCreateOperation';
 import { Type } from '@alkemy-fullstack/prisma-client';
 
 export const NewOperation = () => {
-  const navigate = useNavigate();
-  const createOperationMutation = useMutation(createOperation, {
-    onSuccess: () => navigate('/'),
-  });
+  const createOperationMutation = useCreateOperation();
   const handleSubmit = (values: NewOperationFormData) => {
     const { description, type } = values;
     const [hour, minutes] = values.time.split(':');

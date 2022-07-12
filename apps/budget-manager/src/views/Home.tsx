@@ -2,24 +2,22 @@ import { Stack, Card, Grid, useMantineTheme, Title } from '@mantine/core';
 import { useQuery } from 'react-query';
 import { BalanceCard } from '../components/Balance/BalanceCard';
 import { OperationsTable } from '../components/Operations/OperationsTable';
-import { getBalance } from '../react-query/balance';
-import { getOperations } from '../react-query/operations';
+import { useBalance } from '../hooks/useBalance';
+import { useOperations } from '../hooks/useOperations';
 
 export const Home = () => {
   const theme = useMantineTheme();
-  const { data: operationsData, isSuccess: isOperationsSuccess } = useQuery(
-    ['operations', 1],
-    () => getOperations(1)
-  );
-  const { data: balanceData, isSuccess: isBalanceSuccess } = useQuery(
-    'balance',
-    () => getBalance()
-  );
+  const { data: operationsData, status: operationsStatus } = useOperations();
+  const { data: balanceData, status: balanceStatus } = useBalance();
 
   return (
     <Stack spacing="xl">
-      {isOperationsSuccess && isBalanceSuccess && (
-        <>
+      {balanceStatus === 'loading' ? (
+        'Loading...'
+      ) : balanceStatus === 'error' ? (
+        <span>Errored.</span>
+      ) : (
+        balanceStatus === 'success' && (
           <Card shadow="md">
             <Grid styles={{ width: '100%' }}>
               <Grid.Col>
@@ -45,10 +43,18 @@ export const Home = () => {
               </Grid.Col>
             </Grid>
           </Card>
-          <Title order={2}>Operaciones recientes</Title>
-          <OperationsTable operations={operationsData.operations} />
-        </>
+        )
       )}
+      <Title order={2}>Operaciones recientes</Title>
+      {/* {operationsStatus === 'loading' ? (
+        'Loading...'
+      ) : operationsStatus === 'error' ? (
+        <span>Errored.</span>
+      ) : (
+        operationsStatus === 'success' && (
+          <OperationsTable operations={operationsData.operations} />
+        )
+      )} */}
     </Stack>
   );
 };

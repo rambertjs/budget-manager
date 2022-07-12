@@ -9,7 +9,7 @@ import {
 } from '@mantine/core';
 import { DatePicker, TimeInput } from '@mantine/dates';
 import { useForm, zodResolver } from '@mantine/form';
-import { IOperation } from '../../../react-query/operations';
+import { IOperation } from '../../../hooks/useOperations';
 import { z } from 'zod';
 
 const schema = z.object({
