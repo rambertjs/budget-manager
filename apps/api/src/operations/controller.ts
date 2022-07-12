@@ -37,7 +37,7 @@ export const OperationsController = {
       next(new CustomError(400, 'cannot update operation type'));
     if (isNaN(id)) next(new CustomError(400, 'invalid id'));
 
-    OperationsService.update(id, updateBody)
+    OperationsService.update(id, updateBody, req.userId)
       .then((op) => res.json(op))
       .catch(next);
   },
@@ -46,7 +46,7 @@ export const OperationsController = {
     if (isNaN(id)) return res.status(400).json({ error: 'invalid id' });
 
     try {
-      await OperationsService.delete(id);
+      await OperationsService.delete(id, req.userId);
       return res.status(204).end();
     } catch (e) {
       next(e);

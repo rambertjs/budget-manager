@@ -1,3 +1,4 @@
+import { CustomError } from './../errorMiddleware';
 import { prisma } from '../main';
 
 export const OperationsService = {
@@ -41,7 +42,19 @@ export const OperationsService = {
       ),
     };
   },
-  async update(operationId, data) {
+  async update(operationId, data, userId) {
+    const operation = await prisma.operation.findUnique({
+      where: {
+        id: operationId,
+      },
+    });
+    if (!operation) {
+      throw new CustomError(404, 'Operation not found');
+    }
+    if (operation.userId !== userId) {
+      throw new CustomError(403, 'Operation does not belong to user');
+    }
+
     return await prisma.operation.update({
       where: {
         id: operationId,
@@ -49,7 +62,23 @@ export const OperationsService = {
       data,
     });
   },
-  async delete(operationId) {
-    return await prisma.operation.delete({ where: { id: operationId } });
+  async delete(operationId, userId) {
+    // delete if operation belongs to user
+    const operation = await prisma.operation.findUnique({
+      where: {
+        id: operationId,
+      },
+    });
+    if (!operation) {
+      throw new CustomError(404, 'Operation not found');
+    }
+    if (operation.userId !== userId) {
+      throw new CustomError(403, 'Operation does not belong to user');
+    }
+    return await prisma.operation.delete({
+      where: {
+        id: operationId,
+      },
+    });
   },
 };
