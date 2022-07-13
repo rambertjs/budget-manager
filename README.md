@@ -3,6 +3,14 @@
 This project is an [Nx](https://nx.dev) monorepo, containing both frontend and backend for a budget management app.
 Authentication is handled by [JWT](https://jwt.io) tokens, and all data is stored in a Postgres database through [Prisma](https://prisma.io).
 
+## Screenshots
+
+<div display="flex" align="center">
+  <img width="300" src="screenshots/home.png"/>
+  <img width="300" src="screenshots/new.png"/>
+  <img width="300" src="screenshots/all.png"/>
+</div>
+
 ## Technologies used
 
 ![Typescript](https://img.shields.io/badge/-Typescript-3178C6?logo=typescript&logoColor=white&style=for-the-badge)  
