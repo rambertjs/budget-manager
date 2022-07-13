@@ -11,6 +11,7 @@ const schema = z.object({
   time: z.date(),
   amount: z.number(),
 });
+export type EditOperationFormData = z.infer<typeof schema>;
 
 interface Props {
   isOpen: boolean;
@@ -29,14 +30,14 @@ export const EditOperationForm = ({
   const form = useForm({
     initialValues: {
       description: op.description,
-      amount: op.amount,
+      amount: op.amount / 100,
       date: date,
       time: date,
     },
     schema: zodResolver(schema),
   });
 
-  const handleSubmit = (values: z.infer<typeof schema>) => {
+  const handleSubmit = (values: EditOperationFormData) => {
     const { description } = values;
     const amount = values.amount * 100;
     const date = values.date;
@@ -78,9 +79,8 @@ export const EditOperationForm = ({
           }
           precision={2}
           {...form.getInputProps('amount')}
-          value={form.values.amount / 100}
         />
-        <DatePicker label="Fecha" {...form.getInputProps('date')} />
+        <DatePicker locale="es" label="Fecha" {...form.getInputProps('date')} />
         <TimeInput label="Hora" {...form.getInputProps('time')} />
         <Group>
           <Button color="red" onClick={handleClose}>

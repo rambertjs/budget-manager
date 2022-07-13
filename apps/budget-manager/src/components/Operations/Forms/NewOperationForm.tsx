@@ -1,11 +1,12 @@
 import { TextInput, Group, NumberInput, Button, Select } from '@mantine/core';
 import { DatePicker, TimeInput } from '@mantine/dates';
 import { useForm, zodResolver } from '@mantine/form';
+import { IOperation } from '../../../hooks/useOperations';
 import { z } from 'zod';
 
 const schema = z.object({
   date: z.date(),
-  time: z.string().regex(/^([01][0-9]|2[0-3]):([0-5][0-9])$/),
+  time: z.date(),
   description: z.string().max(20, 'Usá una descripción más corta'),
   amount: z.number(),
   type: z.enum(['INGRESO', 'EGRESO']),
@@ -15,20 +16,31 @@ export type NewOperationFormData = z.infer<typeof schema>;
 export const NewOperationForm = ({
   onSubmit,
 }: {
-  onSubmit: (data: NewOperationFormData) => void;
+  onSubmit: (op: Partial<IOperation>) => void;
 }) => {
+  const date = new Date();
   const form = useForm({
     initialValues: {
-      date: new Date(),
-      time: '00:00',
+      date: date,
+      time: date,
       description: '',
       amount: 0,
       type: 'INGRESO' as const,
     },
     schema: zodResolver(schema),
   });
+
+  const handleSubmit = (values: NewOperationFormData) => {
+    const { description, type } = values;
+    const amount = values.amount * 100;
+    const date = values.date;
+    date.setHours(values.time.getHours());
+    date.setMinutes(values.time.getMinutes());
+    onSubmit({ type, description, amount, date: date.toISOString() });
+  };
+
   return (
-    <form onSubmit={form.onSubmit(onSubmit)}>
+    <form onSubmit={form.onSubmit(handleSubmit)}>
       <TextInput
         required
         label="Concepto"
@@ -42,7 +54,7 @@ export const NewOperationForm = ({
           locale="es"
           {...form.getInputProps('date')}
         />
-        <TimeInput label="Hora" />
+        <TimeInput label="Hora" {...form.getInputProps('time')} />
       </Group>
       <Select
         required
@@ -52,6 +64,7 @@ export const NewOperationForm = ({
           { value: 'EGRESO', label: 'Egreso' },
         ]}
         mt="md"
+        {...form.getInputProps('type')}
       />
       <NumberInput
         required
