@@ -1,4 +1,4 @@
-import { Group } from '@mantine/core';
+import { Group, Text } from '@mantine/core';
 
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -42,7 +42,11 @@ export const Operation = ({ op }: { op: IOperation }) => {
       <tr>
         <td>{op.description}</td>
         <td>{dayjs(op.date).format('dddd, MMMM D, YYYY HH:mm')}</td>
-        <td>{formatCurrency(op.amount)}</td>
+        <td>
+          <Text color={op.type === 'INGRESO' ? 'green' : 'red'}>
+            {formatCurrency(op.amount)}
+          </Text>
+        </td>
         <td>
           <Group>
             <DeleteButton onClick={() => setDeleteModalOpen(true)} />
