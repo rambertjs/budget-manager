@@ -25,7 +25,7 @@ export const AppHeader = ({ toggleNavbar, burgerStatus }: Props) => {
   };
   return (
     <Header height={75} p="md">
-      <Group sx={{ height: '100%' }}>
+      <Group sx={{ height: '100%' }} position="apart">
         <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
           <Burger
             opened={burgerStatus}
@@ -36,8 +36,8 @@ export const AppHeader = ({ toggleNavbar, burgerStatus }: Props) => {
         <UnstyledButton component={Link} to="/" style={{ height: '100%' }}>
           <Group style={{ height: '100%' }}>
             <img src="assets/logo.png" alt="" style={{ maxHeight: '100%' }} />
-            <Title px={15} sx={(theme) => ({ color: theme.colors['gray'][7] })}>
-              Tu Presupuesto
+            <Title sx={(theme) => ({ color: theme.colors['gray'][7] })}>
+              Presupuesto
             </Title>
           </Group>
         </UnstyledButton>
