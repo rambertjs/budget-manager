@@ -29,6 +29,7 @@ root.render(
       <QueryClientProvider client={client}>
         <BrowserRouter>
           <Routes>
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<App />}>
               <Route index element={<Home />} />
               <Route path="new" element={<NewOperation />} />
