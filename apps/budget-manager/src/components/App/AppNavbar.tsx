@@ -10,7 +10,7 @@ interface Props {
 export const AppNavbar = ({ isOpen }: Props) => {
   return (
     <Navbar
-      width={{ sm: 200, lg: 300 }}
+      width={{ sm: 200, md: 300 }}
       p="md"
       hidden={!isOpen}
       hiddenBreakpoint="sm"
