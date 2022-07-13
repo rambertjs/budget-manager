@@ -1,6 +1,6 @@
 import { Group, Navbar, ThemeIcon, Text, Button } from '@mantine/core';
 import { type ReactNode } from 'react';
-import { Plus } from 'tabler-icons-react';
+import { List, Plus } from 'tabler-icons-react';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -15,7 +15,8 @@ export const AppNavbar = ({ isOpen }: Props) => {
       hidden={!isOpen}
       hiddenBreakpoint="sm"
     >
-      <NavbarItem icon={<Plus />} text="Nueva operación" />
+      <NavbarItem icon={<Plus />} text="Nueva operación" to="new" />
+      <NavbarItem icon={<List />} text="Operaciones" to="all" />
     </Navbar>
   );
 };
@@ -23,9 +24,10 @@ export const AppNavbar = ({ isOpen }: Props) => {
 interface ItemProps {
   icon: ReactNode;
   text: string;
+  to: string;
 }
-const NavbarItem = ({ icon, text }: ItemProps) => (
-  <Button variant="default" sx={{ border: 0 }} component={Link} to="/new">
+const NavbarItem = ({ icon, text, to }: ItemProps) => (
+  <Button variant="default" sx={{ border: 0 }} component={Link} to={to}>
     <Group>
       <ThemeIcon color="blue" variant="light">
         {icon}
