@@ -9,10 +9,14 @@ type OperationQueryData = {
 };
 
 export const useOperations = (page = 1) => {
-  return useQuery(['operations', page], async () => {
-    const { data } = await axios.get<OperationQueryData>(
-      `/api/operations?page=${page}`
-    );
-    return data;
-  });
+  return useQuery(
+    ['operations', page],
+    async () => {
+      const { data } = await axios.get<OperationQueryData>(
+        `/api/operations?page=${page}`
+      );
+      return data;
+    },
+    { keepPreviousData: true }
+  );
 };
