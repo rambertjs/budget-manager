@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import {
   NewOperationForm,
   NewOperationFormData,
-} from '../components/Operations/NewOperationForm';
+} from '../components/Operations/Forms/NewOperationForm';
 import { useCreateOperation } from '../hooks/useCreateOperation';
 import { Type } from '@alkemy-fullstack/prisma-client';
 

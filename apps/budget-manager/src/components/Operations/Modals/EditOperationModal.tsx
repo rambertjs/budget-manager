@@ -1,6 +1,6 @@
 import { Modal, Stack, Title } from '@mantine/core';
 import { IOperation } from '../../../hooks/useOperations';
-import { EditOperationForm } from '../EditOperationForm';
+import { EditOperationForm } from '../Forms/EditOperationForm';
 
 export const EditOperationModal = ({
   isOpen,

@@ -3,7 +3,7 @@ import { DatePicker, TimeInput } from '@mantine/dates';
 import { useForm, zodResolver } from '@mantine/form';
 import { useEffect } from 'react';
 import { z } from 'zod';
-import { IOperation } from '../../hooks/useOperations';
+import { IOperation } from '../../../hooks/useOperations';
 
 const schema = z.object({
   description: z.string(),
