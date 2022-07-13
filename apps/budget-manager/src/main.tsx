@@ -8,6 +8,7 @@ import App from './App';
 import { Home } from './views/Home';
 import { NewOperation } from './views/NewOperation';
 import { Login } from './views/Login';
+import { ProtectedRoute } from './components/Auth/ProtectedRoute';
 
 const client = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -30,7 +31,14 @@ root.render(
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<App />}>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <App />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<Home />} />
               <Route path="new" element={<NewOperation />} />
             </Route>
