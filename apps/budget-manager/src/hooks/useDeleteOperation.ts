@@ -1,6 +1,12 @@
 import axios from 'axios';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 export const useDeleteOperation = (id: number) => {
-  return useMutation(() => axios.delete(`/api/operations/${id}`));
+  const queryClient = useQueryClient();
+  return useMutation(() => axios.delete(`/api/operations/${id}`), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['operations']);
+      queryClient.invalidateQueries(['balance']);
+    },
+  });
 };
