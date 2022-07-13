@@ -7,7 +7,7 @@ interface IResponse {
 
 export const useAuth = () => {
   const login = (email: string, password: string) => {
-    axios
+    return axios
       .post<IResponse>('/api/auth/login', { email, password })
       .then(({ data }) => {
         localStorage.setItem('token', data.token);
