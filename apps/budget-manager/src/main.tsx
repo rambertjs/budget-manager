@@ -3,15 +3,26 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
+import axios from 'axios';
 import App from './App';
 import { Home } from './views/Home';
 import { NewOperation } from './views/NewOperation';
+import { Login } from './views/Login';
 
 const client = new QueryClient();
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  config.headers = config.headers ?? {};
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
+  return config;
+});
+
 root.render(
   <StrictMode>
     <MantineProvider withNormalizeCSS withGlobalStyles>
