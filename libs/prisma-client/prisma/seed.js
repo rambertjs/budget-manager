@@ -307,8 +307,8 @@ async function seed() {
   await prisma.operation.deleteMany();
   await prisma.user.create({
     data: {
-      email: 'admin@example.com',
-      passwordHash: bcrypt.hashSync('admin', 10),
+      email: 'test@example.com',
+      passwordHash: bcrypt.hashSync('test', 10),
       operations: {
         // @ts-expect-error: nontyped data
         createMany: { data: MOCK_DATA },
