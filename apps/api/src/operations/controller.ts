@@ -5,7 +5,7 @@ export const OperationsController = {
   async create(req, res) {
     const newOperation = await OperationsService.create({
       ...req.body,
-      userId: req.user.id,
+      userId: req.userId,
     });
     res.json(newOperation);
   },
