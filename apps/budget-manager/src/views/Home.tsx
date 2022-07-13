@@ -1,5 +1,4 @@
 import { Stack, Card, Grid, useMantineTheme, Title } from '@mantine/core';
-import { useQuery } from 'react-query';
 import { BalanceCard } from '../components/Balance/BalanceCard';
 import { OperationsTable } from '../components/Operations/OperationsTable';
 import { useBalance } from '../hooks/useBalance';
