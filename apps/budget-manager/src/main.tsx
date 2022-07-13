@@ -9,6 +9,7 @@ import { Home } from './views/Home';
 import { NewOperation } from './views/NewOperation';
 import { Login } from './views/Login';
 import { ProtectedRoute } from './components/Auth/ProtectedRoute';
+import { AllOperations } from './views/AllOperations';
 
 const client = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -41,6 +42,7 @@ root.render(
             >
               <Route index element={<Home />} />
               <Route path="new" element={<NewOperation />} />
+              <Route path="all" element={<AllOperations />} />
             </Route>
           </Routes>
         </BrowserRouter>
