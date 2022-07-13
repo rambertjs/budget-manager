@@ -16,9 +16,9 @@ export const OperationsService = {
       },
     });
     return {
-      income: preBalance[1]?._sum.amount ?? 0,
-      expenses: preBalance[0]?._sum.amount ?? 0,
-      balance: preBalance[1]?._sum.amount - preBalance[0]?._sum.amount || 0,
+      income: preBalance[0]?._sum.amount ?? 0,
+      expenses: preBalance[1]?._sum.amount ?? 0,
+      balance: preBalance[0]?._sum.amount - preBalance[1]?._sum.amount || 0,
     };
   },
   async getAll(lookupParams) {
