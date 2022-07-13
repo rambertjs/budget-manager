@@ -46,7 +46,7 @@ export const Home = () => {
         )
       )}
       <Title order={2}>Operaciones recientes</Title>
-      {/* {operationsStatus === 'loading' ? (
+      {operationsStatus === 'loading' ? (
         'Loading...'
       ) : operationsStatus === 'error' ? (
         <span>Errored.</span>
@@ -54,7 +54,7 @@ export const Home = () => {
         operationsStatus === 'success' && (
           <OperationsTable operations={operationsData.operations} />
         )
-      )} */}
+      )}
     </Stack>
   );
 };
