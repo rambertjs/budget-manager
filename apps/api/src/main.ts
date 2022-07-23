@@ -20,7 +20,7 @@ app.use(prismaErrorMiddleware);
 app.use(customErrorMiddleware);
 
 if (process.env.NODE_ENV === 'production') {
-  const BUILD_PATH = path.join(__dirname, '../budget-manager');
+  const BUILD_PATH = path.join(__dirname, '../budget-manager/src');
   app.use(express.static(BUILD_PATH));
   app.get('*', (req, res) => {
     res.sendFile(path.join(BUILD_PATH, 'index.html'));
