@@ -8,6 +8,7 @@ import {
   customErrorMiddleware,
 } from './errorMiddleware';
 import { AuthMiddleware } from './auth/middleware';
+import * as path from 'path';
 
 const app = express();
 app.use(express.json());
@@ -18,7 +19,15 @@ app.use('/api/operations', [AuthMiddleware, OperationsRouter]);
 app.use(prismaErrorMiddleware);
 app.use(customErrorMiddleware);
 
-const port = process.env.port || 3333;
+if (process.env.NODE_ENV === 'production') {
+  const BUILD_PATH = path.join(__dirname, '../budget-manager');
+  app.use(express.static(BUILD_PATH));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(BUILD_PATH, 'index.html'));
+  });
+}
+
+const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {
   console.log('Listening at http://localhost:' + port + '/api');
 });
