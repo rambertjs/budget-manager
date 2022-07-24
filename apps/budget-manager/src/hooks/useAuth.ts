@@ -27,5 +27,16 @@ export const useAuth = () => {
   const user = () => {
     return localStorage.getItem('email');
   };
-  return { login, logout, isAuthenticated, user };
+  const register = (email: string, password: string) => {
+    return axios
+      .post<IResponse>('/api/auth/register', { email, password })
+      .then(({ data }) => {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('email', data.email);
+      })
+      .catch(({ response: { data } }) => {
+        console.error(data);
+      });
+  };
+  return { login, logout, isAuthenticated, user, register };
 };
