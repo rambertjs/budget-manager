@@ -10,6 +10,7 @@ import { NewOperation } from './views/NewOperation';
 import { Login } from './views/Login';
 import { ProtectedRoute } from './components/Auth/ProtectedRoute';
 import { AllOperations } from './views/AllOperations';
+import { Register } from './views/Register';
 
 const client = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -32,6 +33,7 @@ root.render(
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route
               path="/"
               element={
