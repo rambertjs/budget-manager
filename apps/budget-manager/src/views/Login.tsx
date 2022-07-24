@@ -1,6 +1,6 @@
 import { Center, Title, Stack, Card } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-import { LoginForm } from '../components/Auth/LoginForm';
+import { UserForm } from '../components/Auth/UserForm';
 import { useAuth } from '../hooks/useAuth';
 
 export const Login = () => {
@@ -26,7 +26,7 @@ export const Login = () => {
       <Card shadow="xl" sx={{ width: '40ch' }}>
         <Stack p={'xl'}>
           <Title order={2}>Iniciar sesión</Title>
-          <LoginForm onSubmit={handleSubmit} />
+          <UserForm onSubmit={handleSubmit} type="login" />
         </Stack>
       </Card>
     </Center>
